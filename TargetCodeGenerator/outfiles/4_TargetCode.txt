@@ -1,0 +1,279 @@
+addi $sp,$zero,268697600
+addi $fp,$zero,268697604
+
+# (j,-,-,39)
+j Label_39
+
+# (program,-,-,-)
+program:
+subi $sp,$sp,4
+sw $ra,0($sp)
+subi $sp,$sp,4
+sw $fp,0($sp)
+move $fp,$sp
+
+# (defpar,-,-,a)
+
+# (defpar,-,-,b)
+
+# (defpar,-,-,c)
+
+# (=,0,-,i)
+subi $sp, $sp, 4
+lw $t0,-4($fp)
+addi $t0,$zero,0
+
+# (+,b,c,T0)
+subi $sp, $sp, 4
+lw $t1,-8($fp)
+lw $t2,12($fp)
+lw $t3,16($fp)
+add $t1,$t2,$t3
+
+# (j>,a,T0,10)
+lw $t4,8($fp)
+bgt $t4,$t1,Label_10
+
+# (=,0,-,T1)
+subi $sp, $sp, 4
+lw $t5,-12($fp)
+addi $t5,$zero,0
+
+# (j,-,-,11)
+j Label_11
+
+# (=,1,-,T1)
+Label_10:
+addi $t5,$zero,1
+
+# (j=,T1,0,18)
+Label_11:
+addi $t6,$zero,0
+beq $t5,$t6,Label_18
+
+# (j=,-,-,13)
+subi $sp, $sp, 4
+lw $t7,-16($fp)
+beq $t7,$t7,Label_13
+
+# (*,b,c,T2)
+Label_13:
+subi $sp, $sp, 4
+lw $t8,-20($fp)
+mul $t8,$t2,$t3
+
+# (+,T2,1,T3)
+subi $sp, $sp, 4
+lw $t9,-24($fp)
+sw $t0,-4($fp)
+addi $t0,$zero,1
+add $t9,$t8,$t0
+
+# (+,a,T3,T4)
+subi $sp, $sp, 4
+sw $t1,-8($fp)
+lw $t1,-28($fp)
+add $t1,$t4,$t9
+
+# (=,T4,-,j)
+subi $sp, $sp, 4
+sw $t5,-12($fp)
+lw $t5,-32($fp)
+move $t5,$t1
+
+# (j,-,-,19)
+j Label_19
+
+# (=,a,-,j)
+Label_18:
+move $t5,$t4
+
+# (*,j,2,T5)
+Label_19:
+subi $sp, $sp, 4
+lw $t6,-36($fp)
+sw $t7,-16($fp)
+addi $t7,$zero,2
+mul $t6,$t5,$t7
+
+# (=,T5,-,i)
+sw $t2,12($fp)
+lw $t2,-4($fp)
+move $t2,$t6
+
+# (j<=,i,100,24)
+Label_21:
+sw $t3,16($fp)
+addi $t3,$zero,100
+ble $t2,$t3,Label_24
+
+# (=,0,-,T6)
+subi $sp, $sp, 4
+lw $t0,-40($fp)
+addi $t0,$zero,0
+
+# (j,-,-,25)
+j Label_25
+
+# (=,1,-,T6)
+Label_24:
+addi $t0,$zero,1
+
+# (j=,T6,0,30)
+Label_25:
+sw $t8,-20($fp)
+addi $t8,$zero,0
+beq $t0,$t8,Label_30
+
+# (j,-,-,27)
+j Label_27
+
+# (*,i,2,T7)
+Label_27:
+subi $sp, $sp, 4
+sw $t9,-24($fp)
+lw $t9,-44($fp)
+sw $t1,-28($fp)
+addi $t1,$zero,2
+mul $t9,$t2,$t1
+
+# (=,T7,-,i)
+move $t2,$t9
+
+# (j,-,-,21)
+j Label_21
+
+# (=,i,-,program_return_value)
+Label_30:
+subi $sp, $sp, 4
+sw $t4,8($fp)
+lw $t4,-48($fp)
+move $t4,$t2
+
+# (return,program_return_value,-,program)
+move $v1,$t4
+move $sp,$fp
+addi $sp,$sp,20
+lw $ra,4($fp)
+lw $fp,0($fp)
+jr $ra
+
+# (demo,-,-,-)
+demo:
+subi $sp,$sp,4
+sw $ra,0($sp)
+subi $sp,$sp,4
+sw $fp,0($sp)
+move $fp,$sp
+
+# (defpar,-,-,a)
+
+# (+,a,2,T8)
+subi $sp, $sp, 4
+lw $t0,-4($fp)
+lw $t2,8($fp)
+addi $t4,$zero,2
+add $t0,$t2,$t4
+
+# (=,T8,-,a)
+move $t2,$t0
+
+# (*,a,2,T9)
+subi $sp, $sp, 4
+lw $t5,-8($fp)
+addi $t6,$zero,2
+mul $t5,$t2,$t6
+
+# (=,T9,-,demo_return_value)
+subi $sp, $sp, 4
+lw $t9,-12($fp)
+move $t9,$t5
+
+# (return,demo_return_value,-,demo)
+move $v1,$t9
+move $sp,$fp
+addi $sp,$sp,12
+lw $ra,4($fp)
+lw $fp,0($fp)
+jr $ra
+
+# (main,-,-,-)
+Label_39:
+main:
+subi $sp,$sp,4
+sw $ra,0($sp)
+subi $sp,$sp,4
+sw $fp,0($sp)
+move $fp,$sp
+
+# (=,3,-,a)
+subi $sp, $sp, 4
+lw $t0,-4($fp)
+addi $t0,$zero,3
+
+# (=,4,-,b)
+subi $sp, $sp, 4
+lw $t2,-8($fp)
+addi $t2,$zero,4
+
+# (=,5,-,c)
+subi $sp, $sp, 4
+lw $t5,-12($fp)
+addi $t5,$zero,5
+
+# (param,c,-,-)
+subi $sp,$sp,4
+sw $t5,0($sp)
+
+# (call,demo,-,T10)
+sw $t0,-4($fp)
+sw $t2,-8($fp)
+sw $t5,-12($fp)
+jal demo
+lw $t0,-4($fp)
+lw $t2,-8($fp)
+lw $t5,-12($fp)
+subi $sp, $sp, 4
+lw $t9,-16($fp)
+move $t9,$v1
+
+# (param,T10,-,-)
+subi $sp,$sp,4
+sw $t9,0($sp)
+
+# (param,b,-,-)
+subi $sp,$sp,4
+sw $t2,0($sp)
+
+# (param,a,-,-)
+subi $sp,$sp,4
+sw $t0,0($sp)
+
+# (call,program,-,T11)
+sw $t9,-16($fp)
+sw $t0,-4($fp)
+sw $t2,-8($fp)
+sw $t5,-12($fp)
+jal program
+lw $t9,-16($fp)
+lw $t0,-4($fp)
+lw $t2,-8($fp)
+lw $t5,-12($fp)
+subi $sp, $sp, 4
+lw $t7,-20($fp)
+move $t7,$v1
+
+# (=,T11,-,a)
+move $t0,$t7
+
+# (=,0,-,main_return_value)
+subi $sp, $sp, 4
+lw $t3,-24($fp)
+addi $t3,$zero,0
+
+# (return,main_return_value,-,main)
+move $v1,$t3
+move $sp,$fp
+addi $sp,$sp,8
+lw $ra,4($fp)
+lw $fp,0($fp)
